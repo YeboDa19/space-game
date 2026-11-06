@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cds5ktm46vppj"]
+
+[ext_resource type="Script" uid="uid://dm5rp1h6b4g4y" path="res://scripts/player/chase_camera.gd" id="1_b0jjr"]
+
+[node name="ChaseCamera" type="Camera3D" unique_id=701355907]
+near = 0.3
+far = 5000.0
+script = ExtResource("1_b0jjr")

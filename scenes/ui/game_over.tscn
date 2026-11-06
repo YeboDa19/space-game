@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://xnaia4f3tdyx"]
+
+[ext_resource type="Script" uid="uid://cb1i0cx0lmjvb" path="res://assets/UI/kenney_crosshair-pack/PNG/Dark/scripts/ui/game_over.gd" id="1_60xr3"]
+
+[node name="GameOver" type="Control" unique_id=166258725]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_60xr3")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=1900170836]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.29411766)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1134760874]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1351559655]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=65877934]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0.3365243, 0.3276529, 1)
+theme_override_font_sizes/font_size = 70
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=720601720]
+unique_name_in_owner = true
+layout_mode = 2
+text = "COntinue"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=922633321]
+unique_name_in_owner = true
+layout_mode = 2
+text = "quit"

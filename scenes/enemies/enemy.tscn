@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cp4a6jmu6tsm2"]
+
+[ext_resource type="Script" uid="uid://bplvb60jxq5lx" path="res://scripts/ai/enemy_state_machine.gd" id="1_fcftc"]
+[ext_resource type="Script" uid="uid://808vh2ra3sun" path="res://scripts/enemies/enemy.gd" id="1_lu5c6"]
+[ext_resource type="Script" uid="uid://ba6cmjuf2o68p" path="res://scripts/ai/wander_state.gd" id="2_lu5c6"]
+[ext_resource type="Script" uid="uid://iup3wtkbkigj" path="res://scripts/ai/chase_state.gd" id="3_nb6gf"]
+[ext_resource type="Script" uid="uid://djk68j7jafyer" path="res://scripts/ai/attack_state.gd" id="4_jt03m"]
+
+[node name="Enemy" type="CharacterBody3D" unique_id=1313354503]
+collision_layer = 4
+motion_mode = 1
+script = ExtResource("1_lu5c6")
+
+[node name="ModelMount" type="Node3D" parent="." unique_id=2007118798]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=208174764]
+
+[node name="Muzzle" type="Marker3D" parent="." unique_id=474124802]
+
+[node name="StateLabel" type="Label3D" parent="." unique_id=1593403507]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+pixel_size = 0.001
+billboard = 1
+no_depth_test = true
+fixed_size = true
+font_size = 48
+
+[node name="StateMachine" type="Node" parent="." unique_id=1048358827]
+script = ExtResource("1_fcftc")
+
+[node name="Wander" type="Node" parent="StateMachine" unique_id=513813134]
+script = ExtResource("2_lu5c6")
+
+[node name="Chase" type="Node" parent="StateMachine" unique_id=338777859]
+script = ExtResource("3_nb6gf")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=398900321]
+script = ExtResource("4_jt03m")

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bp73hpkghpd6"]
+
+[ext_resource type="PackedScene" uid="uid://nalhqk3yjgpe" path="res://assets/Space Ships/Striker/glTF/Striker.gltf" id="1_i70sm"]
+
+[node name="Striker2" unique_id=884976004 instance=ExtResource("1_i70sm")]

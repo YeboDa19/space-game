@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://5m8qhfaf0o4a"]
+
+[ext_resource type="Script" uid="uid://bj4phawa3on7j" path="res://scripts/projectiles/laser.gd" id="1_rlgyd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q4f4y"]
+
+[node name="Laser" type="Area3D" unique_id=248030028]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_rlgyd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2102089496]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 2.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_q4f4y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1376656728]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 3, 0, 0, 0)

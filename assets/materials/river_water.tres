@@ -1,0 +1,21 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://deaofvh8dgtju"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ripples"]
+frequency = 0.02
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ripples"]
+noise = SubResource("FastNoiseLite_ripples")
+seamless = true
+as_normal_map = true
+bump_strength = 4.0
+
+[resource]
+albedo_color = Color(0.07, 0.36, 0.45, 1)
+metallic = 0.2
+metallic_specular = 0.9
+roughness = 0.06
+normal_enabled = true
+normal_scale = 0.7
+normal_texture = SubResource("NoiseTexture2D_ripples")
+uv1_scale = Vector3(3, 30, 1)

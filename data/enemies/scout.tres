@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://bluam4yema0kk"]
+
+[ext_resource type="Script" uid="uid://b0dooda06fqx4" path="res://scripts/enemies/enemy_data.gd" id="1_kt016"]
+[ext_resource type="PackedScene" uid="uid://bp73hpkghpd6" path="res://scenes/enemies/Scout.tscn" id="1_tselv"]
+
+[resource]
+script = ExtResource("1_kt016")
+model_scene = ExtResource("1_tselv")
+model_scale = 4.0
+model_rotation_degrees = Vector3(0, 0, 180)
+hitbox_size = Vector3(4, 1.5, 5)
+muzzle_offset = Vector3(0, 0, -3)
+turn_speed = 3.5
+spread_degrees = 6.0
+aim_lead = 0.4
+metadata/_custom_type_script = "uid://b0dooda06fqx4"

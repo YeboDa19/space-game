@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://8dqqlvl6v6a2"]
+
+[ext_resource type="Script" uid="uid://cv55xq6xhx8ct" path="res://assets/UI/kenney_crosshair-pack/PNG/Dark/scripts/ui/level_complete.gd" id="1_aq2sf"]
+
+[node name="LevelComplete" type="Control" unique_id=551456609]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aq2sf")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=751394926]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.3019608)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=418457210]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=68537200]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=401391336]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Level complete"
+
+[node name="TimeLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=939887438]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00.00.000"
+
+[node name="ReplayButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=201188161]
+unique_name_in_owner = true
+layout_mode = 2
+text = "replay"
+
+[node name="MenuButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1885123310]
+unique_name_in_owner = true
+layout_mode = 2
+text = "main menu"

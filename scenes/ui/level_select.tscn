@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://4gkgjoc6dybo"]
+
+[ext_resource type="Script" uid="uid://rll4pqpoicpo" path="res://assets/UI/kenney_crosshair-pack/PNG/Dark/scripts/ui/level_select.gd" id="1_x15a5"]
+
+[node name="LevelSelect" type="Control" unique_id=1573331017]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x15a5")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=22282757]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.006356496, 1.8049032e-08, 0.13056976, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=133230520]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=337737550]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=151651544]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Select level"
+
+[node name="LevelList" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1014377429]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 120)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=326205669]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 120)
+layout_mode = 2
+text = "Back"

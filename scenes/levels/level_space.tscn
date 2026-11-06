@@ -1,0 +1,239 @@
+[gd_scene format=3 uid="uid://cvkxnmc7jty3v"]
+
+[ext_resource type="Script" uid="uid://bwntnpqlnjgby" path="res://scripts/levels/level_base.gd" id="1_spibk"]
+[ext_resource type="Script" uid="uid://dir0m8kgadaoe" path="res://scripts/levels/debug_buttons.gd" id="2_1opf4"]
+[ext_resource type="PackedScene" uid="uid://cbbjc05a0ee2p" path="res://scenes/enemies/enemy_scout.tscn" id="2_npcsc"]
+[ext_resource type="Script" uid="uid://cqu1sqmwubjpd" path="res://src/flight_navigation_3d.gd" id="3_cvu8f"]
+[ext_resource type="PackedScene" uid="uid://bfirx8ldayyj6" path="res://scenes/enemies/test_target.tscn" id="3_j6phh"]
+[ext_resource type="Script" uid="uid://dqfxcxna6sq1c" path="res://scripts/levels/backdrop_follow.gd" id="3_mr4a2"]
+[ext_resource type="PackedScene" uid="uid://dsvyet7f5obl8" path="res://scenes/enemies/enemy_gunship.tscn" id="3_qwcyk"]
+[ext_resource type="Script" uid="uid://d361y1jsm7w42" path="res://src/greedy_a_star.gd" id="4_6irw5"]
+[ext_resource type="PackedScene" uid="uid://dryl7hw3r6t8h" path="res://assets/Environment/Planet_10.gltf" id="4_e8sqy"]
+[ext_resource type="Resource" uid="uid://d1wlyoaxhyh5v" path="res://scenes/levels/level_space_FlightNavigation.res" id="4_ruq2n"]
+[ext_resource type="Script" uid="uid://chqcvnqb1ljaf" path="res://scripts/levels/prop_scatter.gd" id="4_x6kqo"]
+[ext_resource type="Script" uid="uid://xhcpvjfuruax" path="res://src/svo_voxelizer.gd" id="5_ruq2n"]
+[ext_resource type="PackedScene" uid="uid://7mdw1wrkuiom" path="res://scenes/levels/exit_zone.tscn" id="5_ut1t3"]
+[ext_resource type="PackedScene" uid="uid://b0fdgf5nd6csp" path="res://src/voxelization_target.tscn" id="6_cvu8f"]
+[ext_resource type="Script" uid="uid://dnu7uv8iom3xd" path="res://scripts/levels/level_boundary.gd" id="6_lqvqo"]
+[ext_resource type="PackedScene" uid="uid://d2opbureb08yt" path="res://assets/Environment/Rock_1.gltf" id="6_vu7ga"]
+[ext_resource type="PackedScene" uid="uid://7uhxln12vwjl" path="res://assets/Environment/Rock_2.gltf" id="7_x1l3j"]
+[ext_resource type="PackedScene" uid="uid://priy6lnv1mhl" path="res://assets/Environment/Rock_3.gltf" id="8_lh5go"]
+[ext_resource type="PackedScene" uid="uid://bcfpkxsbev3a8" path="res://assets/Environment/Rock_4.gltf" id="9_cvu8f"]
+[ext_resource type="PackedScene" uid="uid://b8lfd5j0cmokf" path="res://assets/Environment/Rock_Large_3.gltf" id="10_6irw5"]
+[ext_resource type="PackedScene" uid="uid://cox0a4r2011j8" path="res://assets/Environment/Rock_Large_1.gltf" id="11_ruq2n"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lkrb7"]
+sky_top_color = Color(0.019607844, 0.011764706, 0.05882353, 1)
+sky_horizon_color = Color(0.16862746, 0.07058824, 0.27058825, 1)
+ground_bottom_color = Color(0.019607844, 0.011764706, 0.05882353, 1)
+ground_horizon_color = Color(0.16862746, 0.07058824, 0.27058825, 1)
+
+[sub_resource type="Sky" id="Sky_uvad6"]
+sky_material = SubResource("ProceduralSkyMaterial_lkrb7")
+
+[sub_resource type="Environment" id="Environment_q4f4y"]
+background_mode = 2
+background_color = Color(0, 6.016344e-08, 0.17530149, 1)
+sky = SubResource("Sky_uvad6")
+ambient_light_source = 2
+ambient_light_color = Color(0.22745098, 0.22745098, 0.4, 1)
+ambient_light_energy = 0.6
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.8
+fog_enabled = true
+fog_light_color = Color(0.22745098, 0.11372549, 0.36078432, 1)
+fog_density = 0.0006
+fog_sky_affect = 0.3
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.2
+
+[sub_resource type="Resource" id="Resource_q4f4y"]
+script = ExtResource("4_6irw5")
+metadata/_custom_type_script = "uid://d361y1jsm7w42"
+
+[sub_resource type="SphereMesh" id="SphereMesh_npi4h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8a7cj"]
+emission_enabled = true
+emission = Color(1, 0.84313726, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q4f4y"]
+size = Vector3(1400, 400, 2200)
+
+[node name="LevelSpace" type="Node3D" unique_id=279749748]
+script = ExtResource("1_spibk")
+kill_target = 8
+enemy_scenes = Array[PackedScene]([ExtResource("2_npcsc"), ExtResource("3_qwcyk")])
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=1435071294]
+transform = Transform3D(0.64278764, -0.43938503, 0.6275068, 0, 0.819152, 0.5735764, -0.76604444, -0.3686878, 0.52654076, 0, 0, 0)
+light_color = Color(1, 0.9411765, 0.8666667, 1)
+light_energy = 1.2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1542252224]
+environment = SubResource("Environment_q4f4y")
+
+[node name="TestTarget" parent="." unique_id=1383395681 instance=ExtResource("3_j6phh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -250)
+
+[node name="FlightNavigation" type="CSGBox3D" parent="." unique_id=788374145 groups=["flight_navigation"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -750)
+size = Vector3(2400, 2400, 2400)
+script = ExtResource("3_cvu8f")
+sparse_voxel_octree = ExtResource("4_ruq2n")
+pathfinder = SubResource("Resource_q4f4y")
+metadata/_custom_type_script = "uid://cqu1sqmwubjpd"
+
+[node name="SvoVoxelizer" type="Node" parent="FlightNavigation" unique_id=76399576]
+script = ExtResource("5_ruq2n")
+metadata/_custom_type_script = "uid://xhcpvjfuruax"
+
+[node name="VoxelizationTargetShapes" type="CSGCombiner3D" parent="FlightNavigation" unique_id=891376594]
+operation = 1
+
+[node name="NebulaLights" type="Node3D" parent="." unique_id=1521641287]
+
+[node name="NebulaMagenta" type="OmniLight3D" parent="NebulaLights" unique_id=43862372]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 50, -500)
+light_color = Color(1, 0, 1, 1)
+
+[node name="NebulaCyan" type="OmniLight3D" parent="NebulaLights" unique_id=1479882561]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -350, -30, -900)
+light_color = Color(0, 1, 1, 1)
+
+[node name="NebulaOrange" type="OmniLight3D" parent="NebulaLights" unique_id=1822737350]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 80, -1250)
+light_color = Color(1, 0.64705884, 0, 1)
+
+[node name="Backdrop" type="Node3D" parent="." unique_id=1652936124]
+script = ExtResource("3_mr4a2")
+
+[node name="DistantPlanet" parent="Backdrop" unique_id=343491008 instance=ExtResource("4_e8sqy")]
+transform = Transform3D(500, 0, 0, 0, 500, 0, 0, 0, 500, -1000, 300, -2600)
+
+[node name="Sun" type="MeshInstance3D" parent="Backdrop" unique_id=1959859092]
+transform = Transform3D(38.567257, -26.363104, 37.65041, 0, 49.149124, 34.41459, -45.962666, -22.121271, 31.59245, 1880, 1720, 1580)
+mesh = SubResource("SphereMesh_npi4h")
+surface_material_override/0 = SubResource("StandardMaterial3D_8a7cj")
+
+[node name="AsteroidField" type="Node3D" parent="." unique_id=1648071840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -750)
+script = ExtResource("4_x6kqo")
+prop_scenes = Array[PackedScene]([ExtResource("6_vu7ga"), ExtResource("7_x1l3j"), ExtResource("8_lh5go"), ExtResource("9_cvu8f")])
+area_size = Vector3(1200, 400, 1900)
+keep_clear_radius = 90.0
+cull_distance = 900.0
+
+[node name="HeroAsteroids" type="Node3D" parent="." unique_id=221396314]
+
+[node name="Rock_Large_32" parent="HeroAsteroids" unique_id=817713191 instance=ExtResource("10_6irw5")]
+transform = Transform3D(1.8285049, 8.611744, 6.8436804, 6.7467723, 4.601378, -7.5927553, -8.687875, 5.3857884, -4.4559674, 0, 0, -1056.4128)
+
+[node name="VoxelizationTarget" parent="HeroAsteroids/Rock_Large_32/Rock_Large_3/StaticBody3D/CollisionShape3D" parent_id_path=PackedInt32Array(817713191, 1529092517) index="0" unique_id=55945071 instance=ExtResource("6_cvu8f")]
+
+[node name="Rock_Large_12" parent="HeroAsteroids" unique_id=1620390645 instance=ExtResource("11_ruq2n")]
+transform = Transform3D(7.262081, -8.343826, 0, 6.027606, 5.2461505, -7.6487336, 5.7695227, 5.021527, 7.990878, 19.316917, 0, -253.90282)
+
+[node name="VoxelizationTarget" parent="HeroAsteroids/Rock_Large_12/Rock_Large_1/StaticBody3D/CollisionShape3D" parent_id_path=PackedInt32Array(1620390645, 1682431471) index="0" unique_id=1808971264 instance=ExtResource("6_cvu8f")]
+
+[node name="Rock_Large_13" parent="HeroAsteroids" unique_id=1593923443 instance=ExtResource("11_ruq2n")]
+transform = Transform3D(6.076303, -7.131954, 6.226846, -4.980973, -8.700292, -5.104378, 8.051602, 0, -7.8569427, 71, 0, -588.15625)
+
+[node name="VoxelizationTarget" parent="HeroAsteroids/Rock_Large_13/Rock_Large_1/StaticBody3D/CollisionShape3D" parent_id_path=PackedInt32Array(1593923443, 1682431471) index="0" unique_id=1059343832 instance=ExtResource("6_cvu8f")]
+
+[node name="PlayerSpawn" type="Marker3D" parent="." unique_id=696958006 groups=["keep_clear"]]
+
+[node name="EnemySpawns" type="Node3D" parent="." unique_id=2013392792]
+
+[node name="Spawn01" type="Marker3D" parent="EnemySpawns" unique_id=1645238883]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 20, -300)
+
+[node name="Spawn02" type="Marker3D" parent="EnemySpawns" unique_id=1038245844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 20, -300)
+
+[node name="Spawn03" type="Marker3D" parent="EnemySpawns" unique_id=1900033869]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 120, 20, -300)
+
+[node name="Spawn04" type="Marker3D" parent="EnemySpawns" unique_id=1921804290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -160, -40, -420)
+
+[node name="Spawn05" type="Marker3D" parent="EnemySpawns" unique_id=667845573]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -160, -40, -420)
+
+[node name="Spawn06" type="Marker3D" parent="EnemySpawns" unique_id=1415178197]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -160, -40, -420)
+
+[node name="Spawn07" type="Marker3D" parent="EnemySpawns" unique_id=819509430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 90, -560)
+
+[node name="Spawn08" type="Marker3D" parent="EnemySpawns" unique_id=908936327]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 90, -560)
+
+[node name="Spawn09" type="Marker3D" parent="EnemySpawns" unique_id=2101911060]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 90, -560)
+
+[node name="Spawn10" type="Marker3D" parent="EnemySpawns" unique_id=2000559648]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -220, 10, -700)
+
+[node name="Spawn11" type="Marker3D" parent="EnemySpawns" unique_id=1496879745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -220, 10, -700)
+
+[node name="Spawn12" type="Marker3D" parent="EnemySpawns" unique_id=1474640614]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -220, 10, -700)
+
+[node name="ExitZone" parent="." unique_id=1390172251 groups=["keep_clear"] instance=ExtResource("5_ut1t3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1500)
+
+[node name="Boundary" type="Area3D" parent="." unique_id=1609559857]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -750)
+script = ExtResource("6_lqvqo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundary" unique_id=991467493]
+shape = SubResource("BoxShape3D_q4f4y")
+
+[node name="OverlayLayer" type="CanvasLayer" parent="." unique_id=723995031]
+layer = 10
+
+[node name="DebugLayer" type="CanvasLayer" parent="." unique_id=610882261]
+layer = 5
+script = ExtResource("2_1opf4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugLayer" unique_id=1877897877]
+anchors_preset = -1
+anchor_left = 40.0
+anchor_top = 160.0
+anchor_right = 40.0
+anchor_bottom = 160.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InfoLabel" type="Label" parent="DebugLayer/VBoxContainer" unique_id=520469144]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DieButton" type="Button" parent="DebugLayer/VBoxContainer" unique_id=690313081]
+unique_name_in_owner = true
+layout_mode = 2
+text = "DIe"
+
+[node name="WinButton" type="Button" parent="DebugLayer/VBoxContainer" unique_id=1731414133]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Win"
+
+[node name="DamageButton" type="Button" parent="DebugLayer/VBoxContainer" unique_id=1060830149]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Damage"
+
+[node name="KillButton" type="Button" parent="DebugLayer/VBoxContainer" unique_id=1657573002]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 0
+text = "Test: Kill"
+
+[editable path="HeroAsteroids/Rock_Large_32"]
+[editable path="HeroAsteroids/Rock_Large_12"]
+[editable path="HeroAsteroids/Rock_Large_13"]

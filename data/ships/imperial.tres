@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ShipData" format=3 uid="uid://bsjucbscle5qk"]
+
+[ext_resource type="PackedScene" uid="uid://bjy1butpw3cv8" path="res://assets/UI/kenney_crosshair-pack/PNG/Dark/scenes/ships/ship_imperial.tscn" id="1_ssp4e"]
+[ext_resource type="Script" uid="uid://cb4noifrdiof" path="res://assets/UI/kenney_crosshair-pack/PNG/Dark/scripts/ship_data.gd" id="2_wxbiq"]
+
+[resource]
+script = ExtResource("2_wxbiq")
+display_name = "Imperial"
+max_speed = 55.0
+acceleration = 22.0
+turn_rate = 1.8
+max_health = 120
+scene = ExtResource("1_ssp4e")
+camera_offset = Vector3(0, 4, 12)
+metadata/_custom_type_script = "uid://cb4noifrdiof"

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://7mdw1wrkuiom"]
+
+[ext_resource type="Script" uid="uid://c7b85tebxr8bq" path="res://scripts/levels/exit_zone.gd" id="1_omxds"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_q4f4y"]
+radius = 30.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_q4f4y"]
+inner_radius = 27.0
+outer_radius = 30.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8a7cj"]
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+emission_energy_multiplier = 3.0
+
+[node name="ExitZone" type="Area3D" unique_id=1390172251]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_omxds")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=257924120]
+shape = SubResource("SphereShape3D_q4f4y")
+
+[node name="Ring" type="MeshInstance3D" parent="." unique_id=1293759895]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("TorusMesh_q4f4y")
+surface_material_override/0 = SubResource("StandardMaterial3D_8a7cj")

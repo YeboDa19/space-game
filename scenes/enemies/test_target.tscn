@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bfirx8ldayyj6"]
+
+[ext_resource type="Script" uid="uid://bww4gncte1gpo" path="res://scripts/levels/test_target.gd" id="1_uvad6"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_q4f4y"]
+radius = 20.0
+height = 40.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_q4f4y"]
+radius = 5.0
+
+[node name="TestTarget" type="StaticBody3D" unique_id=1383395681]
+script = ExtResource("1_uvad6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=423289198]
+mesh = SubResource("SphereMesh_q4f4y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=261995617]
+shape = SubResource("SphereShape3D_q4f4y")

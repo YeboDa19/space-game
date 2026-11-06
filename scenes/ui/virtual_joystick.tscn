@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bgdo2mkqqwikf"]
+
+[ext_resource type="Script" uid="uid://b113a2c33dhe2" path="res://scripts/ui/virtual_joystick.gd" id="1_pakk4"]
+[ext_resource type="Texture2D" uid="uid://dxbbtnco52w7s" path="res://assets/UI/joystick_circle_pad_a.png" id="2_ih8wq"]
+[ext_resource type="Texture2D" uid="uid://5vv2bc3l1eva" path="res://assets/UI/joystick_circle_nub_a.png" id="3_whvie"]
+
+[node name="VirtualJoystick" type="Control" unique_id=1656421151]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_pakk4")
+
+[node name="Base" type="TextureRect" parent="." unique_id=1457159788]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("2_ih8wq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Knob" type="TextureRect" parent="." unique_id=1539727294]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("3_whvie")
+expand_mode = 1
+stretch_mode = 5

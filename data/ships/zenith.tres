@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ShipData" format=3 uid="uid://dkthxm8cyvm1s"]
+
+[ext_resource type="PackedScene" uid="uid://lqc0v77c8ml0" path="res://assets/UI/kenney_crosshair-pack/PNG/Dark/scenes/ships/ship_zenith.tscn" id="1_e4to7"]
+[ext_resource type="Script" uid="uid://cb4noifrdiof" path="res://assets/UI/kenney_crosshair-pack/PNG/Dark/scripts/ship_data.gd" id="2_t8e73"]
+
+[resource]
+script = ExtResource("2_t8e73")
+display_name = "zenith"
+max_speed = 40.0
+acceleration = 14.0
+turn_rate = 1.4
+max_health = 180
+scene = ExtResource("1_e4to7")
+metadata/_custom_type_script = "uid://cb4noifrdiof"

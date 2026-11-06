@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://bhfiwxkmpfaff"]
+
+[ext_resource type="Script" uid="uid://qq7oi7r2iiqa" path="res://scripts/ui/touch_controls.gd" id="1_l8g55"]
+[ext_resource type="PackedScene" uid="uid://bgdo2mkqqwikf" path="res://scenes/ui/virtual_joystick.tscn" id="2_nk8ty"]
+[ext_resource type="Texture2D" uid="uid://dimm3gjkbtf8r" path="res://assets/UI/icon_fire.png" id="3_sayjt"]
+[ext_resource type="Texture2D" uid="uid://wjjpwbqvxb4e" path="res://assets/UI/icon_crosshair.png" id="3_vs7rr"]
+[ext_resource type="Texture2D" uid="uid://dy0iq80sx24gc" path="res://assets/UI/icon_pedal_brake.png" id="5_0l8t7"]
+
+[node name="TouchControls" type="Control" unique_id=1065169739]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_l8g55")
+
+[node name="Joystick" parent="." unique_id=1656421151 instance=ExtResource("2_nk8ty")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = -560.0
+offset_right = 560.0
+offset_bottom = -60.0
+grow_vertical = 0
+
+[node name="FireAnchor" type="Control" parent="." unique_id=1237764423]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -260.0
+offset_right = -260.0
+offset_bottom = -260.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="FireButton" type="TouchScreenButton" parent="FireAnchor" unique_id=402097927]
+unique_name_in_owner = true
+texture_normal = ExtResource("3_vs7rr")
+
+[node name="BoostAnchor" type="Control" parent="." unique_id=974089864]
+layout_mode = 1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -158.0
+offset_top = -433.0
+offset_right = -38.0
+offset_bottom = 87.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="BoostButton" type="TouchScreenButton" parent="BoostAnchor" unique_id=999142800]
+unique_name_in_owner = true
+texture_normal = ExtResource("3_sayjt")
+
+[node name="BrakeAnchor" type="Control" parent="." unique_id=1061021215]
+layout_mode = 1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -378.0
+offset_top = -389.0
+offset_right = -338.0
+offset_bottom = -349.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="BrakeButton" type="TouchScreenButton" parent="BrakeAnchor" unique_id=199524059]
+unique_name_in_owner = true
+texture_normal = ExtResource("5_0l8t7")

@@ -1,0 +1,7 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Build artifacts (too large for GitHub)
+*.apk
+*.idsig

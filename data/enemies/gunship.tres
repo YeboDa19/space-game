@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://4q7ovexmnqix"]
+
+[ext_resource type="PackedScene" uid="uid://c5ik2y2wq3bgg" path="res://scenes/enemies/Gunship.tscn" id="1_7cyp0"]
+[ext_resource type="Script" uid="uid://b0dooda06fqx4" path="res://scripts/enemies/enemy_data.gd" id="1_qmuok"]
+
+[resource]
+script = ExtResource("1_qmuok")
+model_scene = ExtResource("1_7cyp0")
+model_scale = 8.0
+model_rotation_degrees = Vector3(0, 0, 180)
+hitbox_size = Vector3(8, 3, 10)
+muzzle_offset = Vector3(0, 0, -5)
+max_speed = 36.0
+max_acceleration = 45.0
+turn_speed = 2.0
+detection_range = 400.0
+attack_range = 280.0
+lose_range = 700.0
+wander_radius = 250.0
+max_health = 80
+fire_cooldown = 1.5
+laser_damage = 12
+laser_speed = 100.0
+spread_degrees = 3.0
+metadata/_custom_type_script = "uid://b0dooda06fqx4"
