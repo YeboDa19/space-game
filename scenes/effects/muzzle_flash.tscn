@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dxwivhxhxt3g"]
+
+[ext_resource type="Material" uid="uid://bmhyp0bv4pmye" path="res://assets/materials/particle_glow.tres" id="1_tmmjm"]
+[ext_resource type="Script" uid="uid://cwaggk8isf1ih" path="res://scripts/effects/one_shot_effect.gd" id="2_b1ei3"]
+
+[sub_resource type="Gradient" id="Gradient_s7lon"]
+colors = PackedColorArray(1, 0.95468724, 0.7977378, 1, 1, 0.735357, 0.3491902, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8a7cj"]
+gradient = SubResource("Gradient_s7lon")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_npi4h"]
+direction = Vector3(0, 0, -1)
+spread = 30.0
+initial_velocity_min = 4.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.9
+color_ramp = SubResource("GradientTexture1D_8a7cj")
+
+[sub_resource type="QuadMesh" id="QuadMesh_q4f4y"]
+material = ExtResource("1_tmmjm")
+size = Vector2(0.6, 0.6)
+
+[node name="MuzzleFlash" type="GPUParticles3D" unique_id=1437889784]
+amount = 6
+lifetime = 0.12
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_npi4h")
+draw_pass_1 = SubResource("QuadMesh_q4f4y")
+script = ExtResource("2_b1ei3")

@@ -2,14 +2,19 @@ class_name ChaseCamera
 extends Camera3D
 ## Third-person chase camera in the style of EverSpace 2: follows behind and
 ## above the ship, lags slightly in turns, looks ahead and widens FOV with speed.
+## Also shakes when the player is hit (trauma-based shake).
 
 @export var position_smoothing: float = 6.0
 @export var look_ahead_distance: float = 40.0
 @export var base_fov: float = 60.0
 @export var max_fov_boost: float = 15.0
 @export var fov_smoothing: float = 3.0
+@export var shake_decay: float = 1.8
+@export var max_shake_offset: float = 0.6
 
 var target: Player
+
+var _trauma: float = 0.0
 
 
 func _ready() -> void:
@@ -30,12 +35,25 @@ func _physics_process(delta: float) -> void:
 	var speed_ratio := clampf(target.current_speed / target.max_speed, 0.0, 1.5)
 	var target_fov := base_fov + max_fov_boost * speed_ratio
 	fov = lerpf(fov, target_fov, 1.0 - exp(-fov_smoothing * delta))
+	_apply_shake(delta)
+
+
+## Adds screen shake. 0.3 is a light hit, 1.0 is a huge one.
+func add_trauma(amount: float) -> void:
+	_trauma = minf(_trauma + amount, 1.0)
 
 
 ## Jumps straight to the follow position (use right after spawning).
 func snap_to_target() -> void:
 	global_position = _get_desired_position()
 	_look_ahead_of_target()
+
+
+func _apply_shake(delta: float) -> void:
+	_trauma = maxf(_trauma - shake_decay * delta, 0.0)
+	var shake := _trauma * _trauma # squaring makes small hits subtle, big hits violent
+	h_offset = randf_range(-1.0, 1.0) * max_shake_offset * shake
+	v_offset = randf_range(-1.0, 1.0) * max_shake_offset * shake
 
 
 func _get_desired_position() -> Vector3:

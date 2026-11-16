@@ -7,8 +7,11 @@ signal died
 
 const LASER_SCENE: PackedScene = preload("res://scenes/projectiles/laser.tscn")
 const EXPLOSION_SCENE: PackedScene = preload("res://scenes/effects/explosion.tscn")
+const ENGINE_TRAIL_SCENE: PackedScene = preload("res://scenes/effects/engine_trail.tscn")
+const MUZZLE_FLASH_SCENE: PackedScene = preload("res://scenes/effects/muzzle_flash.tscn")
 const WORLD_MASK := 1
 const MIN_SPEED_RATIO := 0.4
+
 
 @export var data: EnemyData
 ## Shows the current state above the enemy (useful for debugging and the video).
@@ -19,6 +22,7 @@ var player: Player
 var home_position: Vector3
 var health: int = 0
 var is_dead: bool = false
+var _laser_sound: AudioStreamPlayer3D
 
 var forward: Vector3:
 	get:
@@ -42,6 +46,8 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player") as Player
 	state_label.visible = show_state_label
 	state_machine.state_changed.connect(_on_state_changed)
+	_laser_sound = AudioManager.create_player_3d(&"laser_enemy", 2)
+	add_child(_laser_sound)
 
 
 func _physics_process(_delta: float) -> void:
@@ -54,6 +60,7 @@ func _physics_process(_delta: float) -> void:
 func take_damage(amount: int) -> void:
 	if is_dead:
 		return
+	AudioManager.play_sfx_3d(&"enemy_hit", global_position, 0.1)
 	health -= amount
 	if health <= 0:
 		_die()
@@ -125,6 +132,11 @@ func is_aimed_at_player(min_dot: float) -> bool:
 
 
 func fire_laser() -> void:
+	var flash := MUZZLE_FLASH_SCENE.instantiate() as Node3D
+	muzzle.add_child(flash)
+	_laser_sound.pitch_scale = randf_range(0.9, 1.1)
+	_laser_sound.play()
+	
 	var laser := LASER_SCENE.instantiate() as Laser
 	# Add to the level, not to the enemy, so the laser doesn't move with the ship.
 	get_parent().add_child(laser)
@@ -158,6 +170,11 @@ func _apply_data() -> void:
 	box.size = data.hitbox_size
 	collision_shape.shape = box
 	muzzle.position = data.muzzle_offset
+	var trail := ENGINE_TRAIL_SCENE.instantiate() as EngineTrail
+	model_mount.add_child(trail)
+	trail.position = data.engine_offset
+	trail.amount_ratio = 0.5 # half density: there can be a dozen enemies
+	trail.set_color(data.engine_color)
 
 
 func _initialize_after_spawn() -> void:
@@ -168,6 +185,7 @@ func _initialize_after_spawn() -> void:
 
 
 func _die() -> void:
+	AudioManager.play_sfx_3d(&"explosion", global_position, 0.1)
 	is_dead = true
 	var explosion := EXPLOSION_SCENE.instantiate() as Node3D
 	get_parent().add_child(explosion)

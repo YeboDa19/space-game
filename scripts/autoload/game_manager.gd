@@ -1,6 +1,10 @@
 extends Node
 ## Global game state and scene navigation. Registered as the "GameManager" autoload.
 
+const SAVE_PATH := "user://save.cfg"
+
+var best_times: Dictionary = {}
+
 const MAIN_MENU_PATH := "res://scenes/ui/main_menu.tscn"
 
 const SHIP_PATHS: Array[String] = [
@@ -31,6 +35,8 @@ var ships: Array[ShipData] = []
 func _ready() -> void:
 	for path in SHIP_PATHS:
 		ships.append(load(path) as ShipData)
+		
+	_load_best_times()
 
 
 func get_selected_ship() -> ShipData:
@@ -63,3 +69,32 @@ func format_time(seconds: float) -> String:
 	var secs := int(seconds) % 60
 	var millis := int((seconds - floorf(seconds)) * 1000.0)
 	return "%02d:%02d.%03d" % [minutes, secs, millis]
+	
+## Best time for a level in seconds, or -1.0 if it has never been completed.
+func get_best_time(level_index: int) -> float:
+	return best_times.get(level_index, -1.0)
+
+
+## Stores a finished time. Returns true if it is a new record.
+func submit_time(level_index: int, seconds: float) -> bool:
+	var best := get_best_time(level_index)
+	if best >= 0.0 and seconds >= best:
+		return false
+	best_times[level_index] = seconds
+	_save_best_times()
+	return true
+
+
+func _save_best_times() -> void:
+	var config := ConfigFile.new()
+	for level_index in best_times:
+		config.set_value("best_times", str(level_index), best_times[level_index])
+	config.save(SAVE_PATH)
+
+
+func _load_best_times() -> void:
+	var config := ConfigFile.new()
+	if config.load(SAVE_PATH) != OK:
+		return
+	for key in config.get_section_keys("best_times"):
+		best_times[int(key)] = config.get_value("best_times", key)

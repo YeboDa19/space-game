@@ -27,6 +27,7 @@ func _ready() -> void:
 	speed_bar.max_value = GameManager.MAX_SPEED_STAT
 	accel_bar.max_value = GameManager.MAX_ACCELERATION_STAT
 	_show_ship()
+	AudioManager.play_music(&"music_menu")
 
 
 func _process(delta: float) -> void:

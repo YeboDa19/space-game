@@ -15,6 +15,7 @@ const LAYER_ENEMY_PROJECTILE := 16
 @export var lifetime: float = 3.0
 @export var player_material: Material
 @export var enemy_material: Material
+@export var hit_spark_scene: PackedScene
 
 var _age: float = 0.0
 
@@ -48,4 +49,13 @@ func setup(from_player: bool, new_damage: int) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
+	_spawn_hit_spark()
 	queue_free()
+
+
+func _spawn_hit_spark() -> void:
+	if hit_spark_scene == null:
+		return
+	var spark := hit_spark_scene.instantiate() as Node3D
+	get_parent().add_child(spark)
+	spark.global_position = global_position

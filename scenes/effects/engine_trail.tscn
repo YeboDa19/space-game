@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bqnhhustefsno"]
+
+[ext_resource type="Material" path="res://assets/materials/particle_glow.tres" id="1_4sil0"]
+[ext_resource type="Script" uid="uid://cabfxfytourgk" path="res://scripts/effects/engine_trail.gd" id="2_kclbf"]
+
+[sub_resource type="Gradient" id="Gradient_jski2"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wdwbc"]
+gradient = SubResource("Gradient_jski2")
+
+[sub_resource type="Curve" id="Curve_w3d0k"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8a7cj"]
+curve = SubResource("Curve_w3d0k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_npi4h"]
+direction = Vector3(0, 0, 1)
+spread = 4.0
+initial_velocity_max = 1.5
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_max = 1.1
+scale_over_velocity_curve = SubResource("CurveTexture_8a7cj")
+color_ramp = SubResource("GradientTexture1D_wdwbc")
+
+[sub_resource type="QuadMesh" id="QuadMesh_q4f4y"]
+material = ExtResource("1_4sil0")
+size = Vector2(0.9, 0.9)
+
+[node name="EngineTrail" type="GPUParticles3D" unique_id=237309057]
+amount = 60
+visibility_aabb = AABB(-60, -60, -60, 120, 120, 120)
+local_coords = true
+trail_lifetime = 0.6
+process_material = SubResource("ParticleProcessMaterial_npi4h")
+draw_pass_1 = SubResource("QuadMesh_q4f4y")
+script = ExtResource("2_kclbf")

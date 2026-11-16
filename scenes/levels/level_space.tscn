@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bwntnpqlnjgby" path="res://scripts/levels/level_base.gd" id="1_spibk"]
 [ext_resource type="Script" uid="uid://dir0m8kgadaoe" path="res://scripts/levels/debug_buttons.gd" id="2_1opf4"]
 [ext_resource type="PackedScene" uid="uid://cbbjc05a0ee2p" path="res://scenes/enemies/enemy_scout.tscn" id="2_npcsc"]
+[ext_resource type="PackedScene" uid="uid://c0hkac6y6higo" path="res://scenes/effects/space_dust.tscn" id="2_qwcyk"]
 [ext_resource type="Script" uid="uid://cqu1sqmwubjpd" path="res://src/flight_navigation_3d.gd" id="3_cvu8f"]
 [ext_resource type="PackedScene" uid="uid://bfirx8ldayyj6" path="res://scenes/enemies/test_target.tscn" id="3_j6phh"]
 [ext_resource type="Script" uid="uid://dqfxcxna6sq1c" path="res://scripts/levels/backdrop_follow.gd" id="3_mr4a2"]
@@ -64,6 +65,7 @@ size = Vector3(1400, 400, 2200)
 
 [node name="LevelSpace" type="Node3D" unique_id=279749748]
 script = ExtResource("1_spibk")
+ambient_particles = ExtResource("2_qwcyk")
 kill_target = 8
 enemy_scenes = Array[PackedScene]([ExtResource("2_npcsc"), ExtResource("3_qwcyk")])
 

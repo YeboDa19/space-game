@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ShipData" format=3 uid="uid://ciwykfsyxiqgg"]
 
-[ext_resource type="PackedScene" uid="uid://cs8yg8th5br0y" path="res://assets/UI/kenney_crosshair-pack/PNG/Dark/scenes/ships/ship_executioner.tscn" id="1_uh7yo"]
-[ext_resource type="Script" uid="uid://cb4noifrdiof" path="res://assets/UI/kenney_crosshair-pack/PNG/Dark/scripts/ship_data.gd" id="2_w4erk"]
+[ext_resource type="PackedScene" uid="uid://cs8yg8th5br0y" path="res://scenes/ships/ship_executioner.tscn" id="1_uh7yo"]
+[ext_resource type="Script" uid="uid://cb4noifrdiof" path="res://scripts/ship_data.gd" id="2_w4erk"]
 
 [resource]
 script = ExtResource("2_w4erk")
@@ -10,6 +10,7 @@ max_speed = 70.0
 acceleration = 30.0
 turn_rate = 2.2
 max_health = 80
+engine_color = Color(0.58383155, 0.9063318, 1, 1)
 scene = ExtResource("1_uh7yo")
 camera_offset = Vector3(0, 2.5, 8)
 metadata/_custom_type_script = "uid://cb4noifrdiof"

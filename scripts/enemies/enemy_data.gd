@@ -35,3 +35,6 @@ extends Resource
 @export var spread_degrees: float = 5.0
 ## 0 = shoot where the player is, 1 = perfectly lead the player's movement.
 @export_range(0.0, 1.0) var aim_lead: float = 0.5
+## Where the engine trail attaches (the tail is +Z).
+@export var engine_offset: Vector3 = Vector3(0.0, 0.0, 3.0)
+@export var engine_color: Color = Color(1.0, 0.35, 0.2)

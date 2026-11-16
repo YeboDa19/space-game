@@ -7,9 +7,13 @@ extends CharacterBody3D
 
 signal health_changed(current: int, maximum: int)
 signal died
+signal damaged(amount: int)
 
 const LASER_SCENE: PackedScene = preload("res://scenes/projectiles/laser.tscn")
 const MUZZLE_NAMES: Array[String] = ["MuzzleLeft", "MuzzleRight"]
+const EXPLOSION_SCENE: PackedScene = preload("res://scenes/effects/explosion.tscn")
+const ENGINE_TRAIL_SCENE: PackedScene = preload("res://scenes/effects/engine_trail.tscn")
+const MUZZLE_FLASH_SCENE: PackedScene = preload("res://scenes/effects/muzzle_flash.tscn")
 
 const START_SPEED_RATIO := 0.2
 const MAX_PITCH_DEGREES := 70.0
@@ -55,13 +59,21 @@ var _crash_cooldown_left: float = 0.0
 var _fire_cooldown_left: float = 0.0
 var _next_muzzle: int = 0
 
+var _laser_sound: AudioStreamPlayer3D
+var _engine_sound: AudioStreamPlayer3D
+
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var ship_mount: Node3D = $ShipMount
-
+@onready var engine_light: OmniLight3D = $ShipMount/EngineLight
 
 func _ready() -> void:
 	add_to_group("player")
 	setup(GameManager.get_selected_ship())
+	_laser_sound = AudioManager.create_player_3d(&"laser_player", 2)
+	add_child(_laser_sound)
+	_engine_sound = AudioManager.create_player_3d(&"engine_loop", 1)
+	add_child(_engine_sound)
+	_engine_sound.play()
 
 
 func _physics_process(delta: float) -> void:
@@ -97,12 +109,26 @@ func sync_orientation_from_transform() -> void:
 func take_damage(amount: int) -> void:
 	if is_dead:
 		return
+	damaged.emit(amount)
+	AudioManager.play_sfx(&"player_hit", 0.1)
 	health = maxi(health - amount, 0)
 	health_changed.emit(health, max_health)
 	if health == 0:
-		is_dead = true
-		died.emit()
+		_die()
 
+func _die() -> void:
+	AudioManager.play_sfx_3d(&"explosion", global_position)
+	_engine_sound.stop()
+	engine_light.visible = false
+	is_dead = true
+	ship_mount.visible = false
+	# Physics changes can't happen inside a collision callback, so defer.
+	collision_shape.set_deferred("disabled", true)
+
+	var explosion := EXPLOSION_SCENE.instantiate() as Node3D
+	get_parent().add_child(explosion)
+	explosion.global_position = global_position
+	died.emit()
 
 func _build_ship(ship_scene: PackedScene) -> void:
 	var ship := ship_scene.instantiate() as Node3D
@@ -119,6 +145,12 @@ func _build_ship(ship_scene: PackedScene) -> void:
 		muzzles.append(ship.get_node(muzzle_name) as Marker3D)
 
 	engine_glow = ship.get_node("EngineGlow") as GPUParticles3D
+	
+	var trail := ENGINE_TRAIL_SCENE.instantiate() as EngineTrail
+	ship.add_child(trail)
+	trail.position = engine_glow.position
+	trail.set_color(ship_data.engine_color)
+	engine_light.light_color = ship_data.engine_color
 
 
 func _update_steering(delta: float) -> void:
@@ -164,6 +196,9 @@ func _update_visuals(delta: float) -> void:
 	var target_bank := -_smoothed_steer.x * deg_to_rad(MAX_BANK_DEGREES)
 	var weight := 1.0 - exp(-BANK_SMOOTHING * delta)
 	ship_mount.rotation.z = lerp_angle(ship_mount.rotation.z, target_bank, weight)
+	var speed_ratio := clampf(current_speed / max_speed, 0.0, 1.5)
+	_engine_sound.pitch_scale = 0.7 + 0.5 * speed_ratio
+	engine_light.light_energy = 0.8 + 0.8 * speed_ratio
 
 	if engine_glow:
 		engine_glow.amount_ratio = clampf(current_speed / max_speed, 0.2, 1.0)
@@ -179,6 +214,10 @@ func _update_firing(delta: float) -> void:
 func _fire_laser() -> void:
 	# Alternate between the left and right guns.
 	var muzzle := muzzles[_next_muzzle]
+	var flash := MUZZLE_FLASH_SCENE.instantiate() as Node3D
+	muzzle.add_child(flash)
+	_laser_sound.pitch_scale = randf_range(0.92, 1.08)
+	_laser_sound.play()
 	_next_muzzle = (_next_muzzle + 1) % muzzles.size()
 
 	var laser := LASER_SCENE.instantiate() as Laser

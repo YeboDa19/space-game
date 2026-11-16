@@ -14,6 +14,7 @@ func _ready() -> void:
 		button.pressed.connect(_on_level_pressed.bind(i))
 		level_list.add_child(button)
 	back_button.pressed.connect(GameManager.go_to_main_menu)
+	AudioManager.play_music(&"music_menu")
 
 
 func _on_level_pressed(index: int) -> void:

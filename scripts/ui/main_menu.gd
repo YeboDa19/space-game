@@ -17,6 +17,7 @@ func _ready() -> void:
 	level_button.pressed.connect(_change_scene.bind(LEVEL_SELECT_PATH))
 	quit_button.pressed.connect(get_tree().quit)
 	_update_selection_label()
+	AudioManager.play_music(&"music_menu")
 
 
 func _update_selection_label() -> void:

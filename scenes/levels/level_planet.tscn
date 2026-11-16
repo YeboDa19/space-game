@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dir0m8kgadaoe" path="res://scripts/levels/debug_buttons.gd" id="2_5dftd"]
 [ext_resource type="Material" uid="uid://cqwcd5yr2ucuo" path="res://assets/materials/sand_rock_ground.tres" id="2_8ouje"]
 [ext_resource type="Script" uid="uid://dqfxcxna6sq1c" path="res://scripts/levels/backdrop_follow.gd" id="2_8vlv7"]
+[ext_resource type="PackedScene" uid="uid://ewwga0fr1g7y" path="res://scenes/effects/canyon_dust.tscn" id="2_lw1xg"]
 [ext_resource type="Material" uid="uid://deaofvh8dgtju" path="res://assets/materials/river_water.tres" id="3_f2vd1"]
 [ext_resource type="PackedScene" uid="uid://b8lfd5j0cmokf" path="res://assets/Environment/Rock_Large_3.gltf" id="3_ovr6l"]
 [ext_resource type="Script" uid="uid://chqcvnqb1ljaf" path="res://scripts/levels/prop_scatter.gd" id="4_8ouje"]
@@ -56,6 +57,7 @@ size = Vector3(900, 400, 2300)
 
 [node name="LevelPlanet" type="Node3D" unique_id=279749748]
 script = ExtResource("1_brg6p")
+ambient_particles = ExtResource("2_lw1xg")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1934167514]
 environment = SubResource("Environment_e8sqy")

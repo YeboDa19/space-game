@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://8dqqlvl6v6a2"]
 
-[ext_resource type="Script" uid="uid://cv55xq6xhx8ct" path="res://assets/UI/kenney_crosshair-pack/PNG/Dark/scripts/ui/level_complete.gd" id="1_aq2sf"]
+[ext_resource type="Script" uid="uid://cv55xq6xhx8ct" path="res://scripts/ui/level_complete.gd" id="1_aq2sf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_q4f4y"]
+font_color = Color(1, 0.7200002, 0, 1)
 
 [node name="LevelComplete" type="Control" unique_id=551456609]
 layout_mode = 3
@@ -51,3 +54,16 @@ text = "replay"
 unique_name_in_owner = true
 layout_mode = 2
 text = "main menu"
+
+[node name="BestLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=908906506]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Best: 00:00.00"
+horizontal_alignment = 1
+
+[node name="RecordLabel" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1698709419]
+visible = false
+layout_mode = 2
+text = "NEW RECORD!"
+label_settings = SubResource("LabelSettings_q4f4y")
+horizontal_alignment = 1

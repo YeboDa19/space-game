@@ -7,6 +7,7 @@ extends Resource
 @export var acceleration: float = 20.0
 @export var turn_rate: float = 1.5
 @export var max_health: int = 100
+@export var engine_color: Color = Color(0.3, 0.8, 1.0)
 
 ## The ship scene
 @export var scene: PackedScene

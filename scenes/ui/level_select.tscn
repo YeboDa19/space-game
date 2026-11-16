@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://4gkgjoc6dybo"]
 
-[ext_resource type="Script" uid="uid://rll4pqpoicpo" path="res://assets/UI/kenney_crosshair-pack/PNG/Dark/scripts/ui/level_select.gd" id="1_x15a5"]
+[ext_resource type="Script" uid="uid://rll4pqpoicpo" path="res://scripts/ui/level_select.gd" id="1_x15a5"]
 
 [node name="LevelSelect" type="Control" unique_id=1573331017]
 layout_mode = 3
